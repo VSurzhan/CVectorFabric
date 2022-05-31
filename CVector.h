@@ -26,6 +26,8 @@ class CVector {
 public:
     vector<double> coords;
     
+    const char *f;
+    
     CVector();
 
     CVector(int size);
@@ -49,7 +51,7 @@ public:
 
     CVector &operator-=(const CVector &x);
 
-    virtual int output(const char *f = NULL)=0;
+    virtual int output()=0;
     
     virtual ~CVector();
 

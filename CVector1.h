@@ -28,7 +28,7 @@ public:
     
     ~CVector1(){}
 
-    int output(const char *f = NULL);    
+    int output();    
 };
 
 

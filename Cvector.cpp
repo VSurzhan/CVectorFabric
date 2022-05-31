@@ -134,10 +134,10 @@ CVector0:: CVector0(string str)
         }
 }
 
-int CVector0::output(const char *f)
+int CVector0::output()
 {
     ofstream out;
-    out.open(f, fstream::out|fstream::app);
+    out.open(this->f, fstream::out|fstream::app);
     if(!out.is_open())
         return -1;
     for(double i : this->coords)
@@ -161,10 +161,10 @@ CVector1:: CVector1(string str)
         }
 }
 
-int CVector1::output(const char *f)
+int CVector1::output()
 {
     ofstream out;
-    out.open(f, fstream::out|fstream::app);
+    out.open(this->f, fstream::out|fstream::app);
     if(!out.is_open())
         return -1;
     for(double i : this->coords)

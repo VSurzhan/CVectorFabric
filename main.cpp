@@ -67,7 +67,8 @@ int main() {
         in >> t;
         in >> f;
         getline(in, data);
-        if (t == "Hori" || t == "hori" || t == "Vert" || t == "vert")
+        auto item = mapCVector.find(t);
+        if (item != mapCVector.end())
             CVectorList.push_back(make_pair(mapCVector[t]->createCVector(data), f));
         else
         {
@@ -77,7 +78,7 @@ int main() {
     }
     for (auto& i : CVectorList)
     {
-        i.first->output(i.second.c_str());
+        i.first->output();
         delete i.first;
     }
     in.close();

@@ -8,11 +8,15 @@
 #include "CVector.h"
 #include "CVector0.h"
 #include "CVector1.h"
+#include "Fabric.h"
 
 #include <iostream>
 #include <fstream>
 #include <cassert>
 #include <cstdlib>
+#include <functional>
+#include <string>
+
 
 using namespace std;
 
@@ -20,6 +24,14 @@ int main() {
 
     setlocale(LC_ALL, "rus");
 
+    vector <pair<CVector*, string>> CVectorList;
+    map <string, Fabric*> mapCVector;
+    mapCVector["Hori"] = new Fabric0;
+    mapCVector["hori"] = new Fabric0;
+    mapCVector["Vert"] = new Fabric1;
+    mapCVector["vert"] = new Fabric1;
+    
+    
     CVector0 a0(2);
     CVector1 b1(2);
     CVector0 c0(2);
@@ -49,34 +61,26 @@ int main() {
         return 1;
     while (!in.eof())
     {
-        CVector* vec;
-        int x;
-        in >> x;
-        char f[255];
+        string t;
+        string f;
+        string data;
+        in >> t;
         in >> f;
-        char data[500];
-        in.getline(data, 500);
-        if ((x!=0)&&(x!=1))
-        {
-            cout << "Error! Invalid input data!" << endl;
-            exit(1);
-        }
+        getline(in, data);
+        if (t == "Hori" || t == "hori" || t == "Vert" || t == "vert")
+            CVectorList.push_back(make_pair(mapCVector[t]->createCVector(data), f));
         else
         {
-            if (x==0)
-                vec = new CVector0(data);
-            else
-                vec = new CVector1(data);
-            vec->output(f);
-            delete vec;
+            cout<< "Error! Invalid input data!\n";
+            return-1;
         }
     }
+    for (auto& i : CVectorList)
+    {
+        i.first->output(i.second.c_str());
+        delete i.first;
+    }
+    in.close();
     return 0;
+    
 }
-
-
-
-
-
-
-

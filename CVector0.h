@@ -22,13 +22,13 @@ public:
 
     CVector0(const CVector0 &x) : CVector(x){};
     
-    CVector0(char* str);
+    CVector0(string str);
 
     using CVector::operator=;
 
     int output(const char *f = NULL);
     
-    ~CVector0(){}
+
 };
 
 CVector0 operator+(const CVector &, const CVector &);

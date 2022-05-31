@@ -9,75 +9,55 @@
 #include "CVector0.h"
 #include "CVector1.h"
 
+#include <sstream>
 using namespace std;
 
 
-CVector:: CVector()
-{
-    this->t = 0;
-    this->coords = NULL;
-}
+CVector:: CVector(){}
 
 CVector:: CVector(int size)
 {
-    this->t = size;
-    this->coords = new double [size];
-    for (int i = 0; i < size; ++i) {
-        coords[i] = i;
-    }
+    this->coords.resize(size);
+        for (double i : this->coords) {
+            i = 0;
+        }
 }
 
 CVector:: CVector(int size, const char* f)
 {
-    this->t = size;
-    this->coords = new double[size];
+    this->coords.resize(size);
     ifstream in;
     in.open(f);
     if (!in.is_open())
         return;
-    for (int i = 0; i < size; ++i)
-        in >> this->coords[i];
+    for (double i : this->coords)
+        in >> i;
 }
 
 CVector:: CVector(const CVector &x)
 {
-    this->t = x.t;
-    this->coords = new double[x.t];
-    for (int i = 0; i < x.t; ++i)
-    {
-        this->coords[i] = x.coords[i];
-    }
-
+    this->coords = x.coords;
 }
 
 CVector& CVector:: operator=(const CVector &x)
 {
     if (this == &x)
         return *this;
-    this->t = x.t;
-    delete[] coords;
-    this->coords = new double[x.t];
-    for (int i = 0; i < x.t; ++i)
-    {
-        this->coords[i] = x.coords[i];
-    }
+    this->coords = x.coords;
     return *this;
 }
 
 double& CVector:: operator[](int i){
-    if (i >= this->t)
+    if (i >= this->coords.size())
     {
         int N;
-        N = this->t;
-        double *mas;
-        mas = new double[N];
+        N = this->coords.size();
+        vector <double> mas(N);
         for (int j = 0; j < N; ++j)
         {
             mas[j] = this->coords[j];
         }
-        delete [] coords;
-        this->coords = new double[i+1];
-        this->t = i+1;
+        this->coords.resize(i + 1);
         for (int j = 0; j < i+1; ++j)
         {
             if(j < N)
@@ -85,7 +65,6 @@ double& CVector:: operator[](int i){
             else
                 this->coords[j] = 0;
         }
-        delete [] mas;
     }
     return coords[i];
 }
@@ -137,31 +116,18 @@ CVector& CVector:: operator-=(const CVector &x)
     return *this;
 }
 
-CVector::  ~CVector() {
-    delete[] coords;
-}
 
-CVector0:: CVector0()
-{
-    this->t = 0;
-    this->coords = NULL;
-}
+CVector0:: CVector0(){}
 
-CVector0:: CVector0(char *str)
+CVector0:: CVector0(string str)
 {
-    this->t = 0;
-    for (int i = 0; str[i] != 0; ++i)
-        if (str[i] == ' ')
-            t++;
-    this->coords = new double[this->t];
-    int k = 0;
-    char *D = strtok(str, " ");
-    while (D != NULL)
-    {
-        this->coords[k] = atof(D);
-        k++;
-        D = strtok(NULL, " ");
-    }
+    string s;
+    istringstream in (str);
+    while(!in.eof())
+        {
+            in >> s;
+            this->coords.push_back(atof(s.c_str()));
+        }
 }
 
 int CVector0::output(const char *f)
@@ -170,35 +136,25 @@ int CVector0::output(const char *f)
     out.open(f, fstream::out|fstream::app);
     if(!out.is_open())
         return -1;
-    for(int i = 0; i < this->t; ++i)
-        out << this->coords[i] << ' ';
+    for(double i : this->coords)
+            out << i << ' ';
     out << endl;
     out.close();
     return 0;
 }
 
 
-CVector1:: CVector1()
-{
-    this->t = 0;
-    this->coords = NULL;
-}
+CVector1:: CVector1(){}
 
-CVector1:: CVector1(char *str)
+CVector1:: CVector1(string str)
 {
-    this->t = 0;
-    for (int i = 0; str[i] != 0; ++i)
-        if (str[i] == ' ')
-            t++;
-    this->coords = new double[this->t];
-    int k = 0;
-    char *D = strtok(str, " ");
-    while (D != NULL)
-    {
-        this->coords[k] = atof(D);
-        k++;
-        D = strtok(NULL, " ");
-    }
+    string s;
+    istringstream in (str);
+    while(!in.eof())
+        {
+            in >> s;
+            this->coords.push_back(atof(s.c_str()));
+        }
 }
 
 int CVector1::output(const char *f)
@@ -207,8 +163,8 @@ int CVector1::output(const char *f)
     out.open(f, fstream::out|fstream::app);
     if(!out.is_open())
         return -1;
-    for(int i = 0; i < this->t; ++i)
-        out << this->coords[i] << '\n';
+    for(double i : this->coords)
+            out << i << '\n';
     out << endl;
     out.close();
     return 0;
@@ -216,8 +172,8 @@ int CVector1::output(const char *f)
 
 ostream &operator<<(ostream &out, const CVector &x)
 {
-    for (int i = 0; i < x.t; ++i)
-        cout << x.coords[i] << "\t";
+    for (double i : x.coords)
+        cout << i << "\t";
     cout << endl << endl;
     return out;
 }

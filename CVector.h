@@ -13,6 +13,8 @@
 #include <cassert>
 #include <stdlib.h>
 #include <string>
+#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -20,11 +22,9 @@ using namespace std;
 
 class CVector {
     
-protected:
-    int t;
 
 public:
-    double *coords;
+    vector<double> coords;
     
     CVector();
 
@@ -40,7 +40,7 @@ public:
     
     int size() const
     {
-        return t;
+        return coords.size();
     }
 
     const double & operator[](int i)const;

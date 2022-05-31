@@ -25,6 +25,8 @@ public:
     CVector0(string str);
 
     using CVector::operator=;
+    
+    ~CVector0(){}
 
     int output(const char *f = NULL);
     

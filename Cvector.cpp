@@ -116,6 +116,10 @@ CVector& CVector:: operator-=(const CVector &x)
     return *this;
 }
 
+CVector::  ~CVector()
+{
+    coords.~vector();
+}
 
 CVector0:: CVector0(){}
 

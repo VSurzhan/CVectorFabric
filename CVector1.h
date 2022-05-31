@@ -25,6 +25,8 @@ public:
     CVector1(string str);
     
     using CVector :: operator=;
+    
+    ~CVector1(){}
 
     int output(const char *f = NULL);    
 };

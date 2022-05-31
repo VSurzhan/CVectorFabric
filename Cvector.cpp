@@ -23,11 +23,11 @@ CVector:: CVector(int size)
         }
 }
 
-CVector:: CVector(int size, const char* f)
+CVector:: CVector(int size, const char* file)
 {
     this->coords.resize(size);
     ifstream in;
-    in.open(f);
+    in.open(file);
     if (!in.is_open())
         return;
     for (double i : this->coords)
@@ -116,14 +116,8 @@ CVector& CVector:: operator-=(const CVector &x)
     return *this;
 }
 
-CVector::  ~CVector()
-{
-    coords.~vector();
-}
 
-CVector0:: CVector0(){}
-
-CVector0:: CVector0(string str)
+CVector:: CVector(string str, string file)
 {
     string s;
     istringstream in (str);
@@ -132,7 +126,16 @@ CVector0:: CVector0(string str)
             in >> s;
             this->coords.push_back(atof(s.c_str()));
         }
+    this->f = file;
 }
+
+
+CVector::  ~CVector()
+{
+    coords.~vector();
+}
+
+CVector0:: CVector0(){}
 
 int CVector0::output()
 {
@@ -150,16 +153,6 @@ int CVector0::output()
 
 CVector1:: CVector1(){}
 
-CVector1:: CVector1(string str)
-{
-    string s;
-    istringstream in (str);
-    while(!in.eof())
-        {
-            in >> s;
-            this->coords.push_back(atof(s.c_str()));
-        }
-}
 
 int CVector1::output()
 {

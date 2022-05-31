@@ -24,7 +24,7 @@ int main() {
 
     setlocale(LC_ALL, "rus");
 
-    vector <pair<CVector*, string>> CVectorList;
+    vector <CVector*> CVectorList;
     map <string, Fabric*> mapCVector;
     mapCVector["Hori"] = new Fabric0;
     mapCVector["hori"] = new Fabric0;
@@ -69,7 +69,7 @@ int main() {
         getline(in, data);
         auto item = mapCVector.find(t);
         if (item != mapCVector.end())
-            CVectorList.push_back(make_pair(mapCVector[t]->createCVector(data), f));
+            CVectorList.push_back(mapCVector[t]->createCVector(data, f));
         else
         {
             cout<< "Error! Invalid input data!\n";
@@ -78,8 +78,8 @@ int main() {
     }
     for (auto& i : CVectorList)
     {
-        i.first->output();
-        delete i.first;
+        i->output();
+        delete i;
     }
     in.close();
     return 0;

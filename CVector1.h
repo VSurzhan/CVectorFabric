@@ -18,11 +18,11 @@ public:
     
     CVector1(int size) : CVector (size){};
     
-    CVector1(int size, const char* f) : CVector(size, f){};
+    CVector1(int size, const char* file) : CVector(size, file){};
     
     CVector1(const CVector &x) : CVector(x){};
     
-    CVector1(string str);
+    CVector1(string str, string file) : CVector(str, file){};
     
     using CVector :: operator=;
     

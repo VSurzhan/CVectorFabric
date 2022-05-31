@@ -16,24 +16,24 @@ using namespace std;
 
 class Fabric{
 public:
-    virtual CVector* createCVector(string str) = 0;
+    virtual CVector* createCVector(string str, string file) = 0;
 };
 
 class Fabric0: public Fabric
 {
 public:
-    CVector* createCVector(string str)
+    CVector* createCVector(string str, string file)
     {
-        return new CVector0(str);
+        return new CVector0(str, file);
     }
 };
 
 class Fabric1: public Fabric
 {
 public:
-    CVector* createCVector(string str)
+    CVector* createCVector(string str, string file)
     {
-        return new CVector1(str);
+        return new CVector1(str, file);
     }
 };
 

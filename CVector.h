@@ -26,13 +26,13 @@ class CVector {
 public:
     vector<double> coords;
     
-    const char *f;
+    string f;
     
     CVector();
 
     CVector(int size);
 
-    CVector(int size, const char* f);
+    CVector(int size, const char* file);
 
     CVector(const CVector &x);
 
@@ -52,6 +52,8 @@ public:
     CVector &operator-=(const CVector &x);
 
     virtual int output()=0;
+    
+    CVector(string str, string file);
     
     virtual ~CVector();
 
